@@ -1,0 +1,108 @@
+/* ===========================
+   General Layout
+=========================== */
+.daily-quest-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.quest-container {
+  max-width: 500px;
+  width: 100%;
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ===========================
+   Light & Dark Mode
+=========================== */
+.daily-light {
+  --bg-color: #f5f5f5;
+  --text-color: #222;
+  --card-bg: #ffffff;
+}
+
+.daily-dark {
+  --bg-color: #121212;
+  --text-color: #f8f9fa;
+  --card-bg: #1e1e1e;
+}
+
+.daily-quest-page.daily-light {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.daily-quest-page.daily-dark {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* ===========================
+   Quest Items
+=========================== */
+.list-group-item {
+  background-color: transparent !important;
+  color: var(--text-color);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+  transform: scale(1.03);
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+/* ===========================
+   Checkboxes
+=========================== */
+.form-check-input {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* ===========================
+   Bonus Texts
+=========================== */
+.text-success {
+  color: #4caf50 !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+/* ✅ Ensures the "Complete all 3..." text is visible in dark mode */
+.daily-dark .fw-semibold {
+  color: #ffffff !important;
+}
+
+/* ===========================
+   Animations
+=========================== */
+.quest-container h2 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.quest-container p {
+  font-size: 1rem;
+}
+.completed-quest {
+  text-decoration: line-through;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.daily-dark .text-white {
+  color: #fff !important;
+}

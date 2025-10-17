@@ -49,6 +49,10 @@ const Navbar = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="/leaderboard">Leaderboard</a>
                         </li>
+                        <li className="nav-item">
+  <a className="nav-link" href="/dailyquest">Daily-Quest</a>
+</li>
+
                         
 
                         {/* Show user name if logged in, otherwise Join Now */}
