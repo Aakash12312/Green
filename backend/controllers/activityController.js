@@ -5,11 +5,15 @@ import Badge from "../models/Badge.js";
 
 export const addActivity = async (req, res) => {
     try {
-        const { name, type, points, co2Saved } = req.body;
+        let { name, type, points, co2Saved } = req.body;
 
-        if (!name || !type || points === undefined || co2Saved === undefined)
+        // Convert to numbers
+        points = Number(points);
+        co2Saved = Number(co2Saved);
+
+        if (!name || !type || isNaN(points) || isNaN(co2Saved))
             return res.status(400).json({ message: "All fields required" });
-
+        console.log(name, type, points, co2Saved);
         const user = await User.findOne({ name }).populate("badges");
         if (!user) return res.status(400).json({ message: "User not found" });
 
@@ -30,7 +34,6 @@ export const addActivity = async (req, res) => {
 
         await user.save();
 
-        // ✅ Correctly populate badges after saving
         const populatedUser = await user.populate("badges");
 
         res.status(201).json({
@@ -48,6 +51,7 @@ export const addActivity = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 
 export const getUserActivities = async (req, res) => {

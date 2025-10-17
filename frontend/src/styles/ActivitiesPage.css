@@ -1,0 +1,65 @@
+/* ===== PAGE SETUP ===== */
+.activities-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===== PIXELATED GIF BACKGROUNDS ===== */
+.activities-dark {
+    background: url('/waterfall.gif') center center/cover no-repeat;
+    image-rendering: pixelated;
+    color: #fff;
+}
+
+.activities-light {
+    background: url('/morning.gif') center center/cover no-repeat;
+    image-rendering: pixelated;
+    color: #000;
+}
+
+/* ===== CONTAINER CARD ===== */
+.activities-container {
+    z-index: 1;
+    width: 100%;
+    max-width: 500px;
+}
+
+.activities-card {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+/* Adjust card color for light theme */
+.activities-light .activities-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+}
+
+/* ===== FORM ELEMENTS ===== */
+.activities-card input,
+.activities-card select {
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.activities-card .btn {
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.activities-card .btn:hover {
+    transform: translateY(-2px);
+}
