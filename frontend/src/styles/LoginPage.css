@@ -1,0 +1,78 @@
+/* Only target login page container */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Poppins', sans-serif;
+  background: url('/log.gif') no-repeat center center/cover;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.login-page .login-card {
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  backdrop-filter: blur(8px);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] .login-page .login-card {
+  background-color: rgba(30,30,30,0.9);
+  color: #ffffff;
+}
+
+[data-theme="light"] .login-page .login-card {
+  background-color: rgba(255,255,255,0.9);
+  color: #000000;
+}
+
+.login-page .btn {
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.login-page .btn:hover {
+  transform: translateY(-2px);
+}
+
+.login-page a {
+  color: inherit;
+  font-weight: 500;
+}
+
+.login-page a:hover {
+  text-decoration: underline;
+}
+.login-page {
+  font-family: 'Poppins', sans-serif;
+  background: url('/log.gif') no-repeat center center/cover;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.login-card {
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  backdrop-filter: blur(8px);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] .login-card {
+  background-color: rgba(30,30,30,0.9);
+  color: #ffffff;
+}
+
+[data-theme="light"] .login-card {
+  background-color: rgba(255,255,255,0.9);
+  color: #000000;
+}
+
