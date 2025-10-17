@@ -11,17 +11,38 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.react-calendar {
+  border: none !important;
+  background: transparent !important;
+  color: inherit;
+}
+
+.activity-date {
+  background-color: #28a745 !important;
+  border-radius: 50%;
+  color: white !important;
+  font-weight: bold;
+}
+
+.activity-date:enabled:hover {
+  background-color: #218838 !important;
+  color: #fff !important;
 }
 
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

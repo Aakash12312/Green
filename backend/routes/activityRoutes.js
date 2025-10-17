@@ -16,20 +16,21 @@ router.post("/", upload.single("image"), async (req, res) => {
     try {
         let { name, type, points, co2Saved } = req.body;
 
-        // Convert points and co2Saved to numbers
         points = Number(points);
         co2Saved = Number(co2Saved);
 
         if (!name || !type || isNaN(points) || isNaN(co2Saved))
             return res.status(400).json({ message: "All fields required" });
+
         console.log(name, type, points, co2Saved);
+
         const user = await User.findOne({ name }).populate("badges");
         if (!user) return res.status(400).json({ message: "User not found" });
 
-        // Create activity
+        // Create new Activity document
         const activityData = { user: user._id, type, points, co2Saved };
         if (req.file) {
-            activityData.image = req.file.buffer; // store buffer in DB (optional)
+            activityData.image = req.file.buffer;
             activityData.imageType = req.file.mimetype;
         }
 
@@ -38,6 +39,15 @@ router.post("/", upload.single("image"), async (req, res) => {
         // Update user points and badges
         user.points += points;
 
+        // 🌿 Add calendar event
+        user.calendar.push({
+            activityType: type,
+            pointsEarned: points,
+            co2Saved,
+            date: new Date(),
+        });
+
+        // Badge logic
         const allBadgesDocs = await Badge.find();
         const newBadges = [];
 
@@ -67,11 +77,13 @@ router.post("/", upload.single("image"), async (req, res) => {
                 icon: b.icon,
                 threshold: b.threshold,
             })),
+            calendar: user.calendar, // return updated calendar too
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
+
 
 // Get all activities of a user by name
 router.post("/user", async (req, res) => {

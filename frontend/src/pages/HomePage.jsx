@@ -188,7 +188,7 @@ const HomePage = () => {
           transition={{ duration: 1 }}
           className="display-3 fw-bold text-center"
         >
-          <span className="d-block">PLAY, LEARN.</span>
+          <span className="d-block">PLAY,LEARN.</span>
           <span
             className={`d-block mt-2 ${theme === "dark" ? "go-green-dark" : "go-green-light"
               }`}
