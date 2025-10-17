@@ -1,8 +1,15 @@
+/* ===== IMPORT FONT ===== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body, html, .homepage, .hero, .feature-card, .leaderboard-preview, footer, .navbar, .nav-link, h1, h2, h5, p, table, th, td, a, button {
+  font-family: 'Press Start 2P', cursive !important;
+  transition: color 0.4s ease, background 0.4s ease;
+}
+
+/* ===== RESET ===== */
 body, html {
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
-  transition: background 0.4s ease, color 0.4s ease;
   width: 100%;
   min-height: 100vh;
 }
@@ -37,6 +44,23 @@ body, html {
   background: url('/morning.gif') no-repeat center center/cover;
 }
 
+/* Add semi-transparent overlay to prevent mixed colors */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* dim effect for dark theme */
+  z-index: 0;
+}
+
+/* Text inside hero stays above overlay */
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== FLOAT ICONS ===== */
 .hero::before {
   content: "♻️";
   position: absolute;
@@ -72,7 +96,69 @@ body, html {
   transform: translateY(-10px);
 }
 
+/* Force consistent text colors in cards */
+.feature-card h5, .feature-card p {
+  color: inherit !important;
+}
+
 /* ===== LEADERBOARD ===== */
 .leaderboard-preview {
   transition: background 0.4s ease;
+}
+
+/* Force table text color to adapt properly */
+table, th, td {
+  color: inherit !important;
+}
+
+/* ===== NAVBAR ===== */
+/* Ensure links adapt properly in both themes */
+.nav-link, .navbar-brand, .btn, .btn-outline-secondary {
+  color: inherit !important;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  font-size: 0.8rem;
+  color: inherit !important;
+}
+ /* Force navbar background in dark mode */
+[data-theme="dark"] .navbar {
+  background-color: #000 !important; /* full black */
+  transition: background 0.4s ease;
+}
+
+/* Optional: ensure navbar links stay readable */
+[data-theme="dark"] .navbar .nav-link,
+[data-theme="dark"] .navbar .navbar-brand {
+  color: #fff !important;
+}
+
+/* Optional: adjust Join Now button in dark mode if needed */
+[data-theme="dark"] .navbar .btn-success {
+  background-color: #28a745 !important; /* or keep your original green */
+  border-color: #28a745 !important;
+  color: #fff !important;
+}
+
+/* ===== DARK MODE TEXT COLORS (THEMED) ===== */
+[data-theme="dark"] .leaderboard-preview h2 {
+  color: #a3e635 !important; /* soft lime green for "Top Green Heroes 🌍" */
+}
+
+[data-theme="dark"] .features h2 {
+  color: #86efac !important; /* pastel green for "Why Join GoGreen Quest?" */
+}
+
+[data-theme="dark"] footer {
+  color: #cbd5e1 !important; /* light gray for copyright text */
+}
+
+/* Optional: table headers/body in leaderboard */
+[data-theme="dark"] .leaderboard-preview table th {
+  color: #ffffff !important; /* keep headers white for contrast */
+}
+
+[data-theme="dark"] .leaderboard-preview table td {
+  color: #e0e0e0 !important; /* soft white for table rows */
 }
