@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
-
+import {loginUser } from "../controllers/userController.js";
 const router = express.Router();
 
 // Register user
@@ -27,5 +27,5 @@ router.post("/register", async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
-
+router.post("/login", loginUser);
 export default router;
