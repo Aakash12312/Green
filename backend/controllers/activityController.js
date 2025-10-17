@@ -1,33 +1,27 @@
+import mongoose from "mongoose";
 import Activity from "../models/Activity.js";
 import User from "../models/User.js";
 import Badge from "../models/Badge.js";
-import mongoose from "mongoose";
 
 export const addActivity = async (req, res) => {
     try {
         const { name, type, points, co2Saved } = req.body;
 
-        // 1️⃣ Find user by name
+        if (!name || !type || points === undefined || co2Saved === undefined)
+            return res.status(400).json({ message: "All fields required" });
+
         const user = await User.findOne({ name }).populate("badges");
         if (!user) return res.status(400).json({ message: "User not found" });
 
-        // 2️⃣ Create activity
-        const activity = await Activity.create({
-            user: user._id,
-            type,
-            points,
-            co2Saved
-        });
+        const activity = await Activity.create({ user: user._id, type, points, co2Saved });
 
-        // 3️⃣ Update user points
         user.points += points;
 
-        // 4️⃣ Check for new badges
-        const allBadges = await Badge.find();
+        const allBadgesDocs = await Badge.find();
         const newBadges = [];
 
-        allBadges.forEach(badge => {
-            const alreadyEarned = user.badges.some(b => new mongoose.Types.ObjectId(b).equals(badge._id));
+        allBadgesDocs.forEach(badge => {
+            const alreadyEarned = user.badges.some(b => new mongoose.Types.ObjectId(b._id || b).equals(badge._id));
             if (!alreadyEarned && user.points >= badge.threshold) {
                 user.badges.push(badge._id);
                 newBadges.push(badge);
@@ -36,16 +30,25 @@ export const addActivity = async (req, res) => {
 
         await user.save();
 
+        // ✅ Correctly populate badges after saving
+        const populatedUser = await user.populate("badges");
+
         res.status(201).json({
             message: "Activity added successfully",
             activity,
-            newBadges: newBadges.map(b => ({ name: b.name, icon: b.icon, threshold: b.threshold }))
+            newBadges: newBadges.map(b => ({ name: b.name, icon: b.icon, threshold: b.threshold })),
+            allBadges: populatedUser.badges.map(b => ({
+                name: b.name,
+                icon: b.icon,
+                threshold: b.threshold
+            }))
         });
 
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 export const getUserActivities = async (req, res) => {
     try {

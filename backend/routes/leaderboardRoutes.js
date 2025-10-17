@@ -6,15 +6,20 @@ const router = express.Router();
 // GET /api/leaderboard
 router.get("/", async (req, res) => {
     try {
+        // Fetch all users sorted by points descending
         const users = await User.find()
             .sort({ points: -1 })
-            .limit(10)
-            .populate("badges");
+            .populate("badges"); // populate badge info
 
+        // Map users to return only relevant info
         const leaderboard = users.map(u => ({
             name: u.name,
             points: u.points,
-            badges: u.badges.map(b => ({ name: b.name, icon: b.icon }))
+            badges: u.badges.map(b => ({
+                name: b.name,
+                icon: b.icon,
+                threshold: b.threshold
+            }))
         }));
 
         res.json(leaderboard);
