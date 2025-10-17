@@ -5,27 +5,18 @@ const router = express.Router();
 
 // GET /api/leaderboard
 router.get("/", async (req, res) => {
-    try {
-        // Fetch all users sorted by points descending
-        const users = await User.find()
-            .sort({ points: -1 })
-            .populate("badges"); // populate badge info
+  try {
+    // Fetch top 10 users sorted by points descending
+    const users = await User.find()
+      .sort({ points: -1 })
+      .limit(10) // only top 10
+      .select("name points") // only needed fields
+      .lean();
 
-        // Map users to return only relevant info
-        const leaderboard = users.map(u => ({
-            name: u.name,
-            points: u.points,
-            badges: u.badges.map(b => ({
-                name: b.name,
-                icon: b.icon,
-                threshold: b.threshold
-            }))
-        }));
-
-        res.json(leaderboard);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
+    res.json({ topUsers: users });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 export default router;
