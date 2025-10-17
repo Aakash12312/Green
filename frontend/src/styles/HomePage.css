@@ -1,0 +1,72 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* ===== THEMES ===== */
+[data-theme="dark"] {
+  background: linear-gradient(180deg, #0b0d0e 0%, #1b1f1d 100%);
+  color: #ffffff;
+}
+
+[data-theme="light"] {
+  background: linear-gradient(180deg, #e9f9ef 0%, #ffffff 100%);
+  color: #000000;
+}
+
+/* ===== HERO ===== */
+.hero {
+  height: 90vh;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-dark {
+  background: radial-gradient(circle at top left, #1f3522, #0b0d0e);
+}
+
+.hero-light {
+  background: radial-gradient(circle at top left, #d5f3dc, #f5fff8);
+}
+
+.hero::before {
+  content: "♻️";
+  position: absolute;
+  font-size: 5rem;
+  top: 15%;
+  left: 10%;
+  opacity: 0.15;
+  animation: float 4s ease-in-out infinite;
+}
+
+.hero::after {
+  content: "🌍";
+  position: absolute;
+  font-size: 6rem;
+  bottom: 10%;
+  right: 15%;
+  opacity: 0.15;
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* ===== FEATURE CARDS ===== */
+.feature-card {
+  border-radius: 1rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+/* ===== LEADERBOARD ===== */
+.leaderboard-preview {
+  transition: background 0.4s ease;
+}
