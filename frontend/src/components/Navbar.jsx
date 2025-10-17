@@ -57,7 +57,7 @@ const Navbar = () => {
                         <li className="nav-item">
                             {user ? (
                                 <span className={`btn btn-${theme === "dark" ? "success" : "primary"} px-3 fw-semibold`}>
-                                    {user.name}
+                                    <a href="/profile">{user.name}</a>
                                 </span>
                             ) : (
                                 <a
