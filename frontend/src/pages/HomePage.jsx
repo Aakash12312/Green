@@ -307,7 +307,7 @@ const HomePage = () => {
         className={`py-4 text-center ${theme === "dark" ? "bg-dark text-muted" : "bg-light text-secondary"
           }`}
       >
-        <div>© 2025 GoGreen Quest | Built with 💚 by EarthLovers</div>
+        <div>© 2025 GoGreen Quest | Built with 💚 by Code_Smashers</div>
       </footer>
     </div>
   );
